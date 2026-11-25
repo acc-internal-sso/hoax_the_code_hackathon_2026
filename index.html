@@ -604,6 +604,10 @@ body.pm .hero-ctrl{bottom:calc(76px + env(safe-area-inset-bottom,0px));z-index:9
 .fchip:not(.v){background:var(--teal);color:#fff;box-shadow:0 0 20px rgba(13,148,136,.55)}
 @media(max-width:900px){.bi-mid svg{width:170px;height:260px}.bi-mid svg g.lane{display:block}.bi-mid{height:auto}}
 
+.vline{margin-top:22px;display:flex;align-items:center;gap:14px;flex-wrap:wrap;padding:14px 20px;border-radius:16px;border:1px solid rgba(109,74,255,.3);background:linear-gradient(100deg,rgba(109,74,255,.1),rgba(8,145,178,.08));max-width:fit-content;font-size:clamp(15px,1.5vw,19px);font-weight:600}
+.vline b{padding:5px 12px;border-radius:999px;background:linear-gradient(110deg,var(--violet),var(--cyan));color:#fff;font-size:13px;font-weight:800;white-space:nowrap}
+#team .tg{margin-top:30px}
+
 </style>
 </head>
 <body>
@@ -777,6 +781,7 @@ body.pm .hero-ctrl{bottom:calc(76px + env(safe-area-inset-bottom,0px));z-index:9
   <div class="beat wrap" data-beat>
     <p class="tag"><i></i>The team behind the automation</p>
     <h2 class="h2 wide">One team. One vision. One intelligent workflow.</h2>
+    <p class="vline"><b>Future vision</b><span>Extend this across Data Solutions, at every layer, wherever a Target-to-Source TFS document is involved.</span></p>
     <div class="tg" id="tg"><svg id="tlines" aria-hidden="true"></svg></div>
     <p class="teamline">Six contributors focused on one automation goal.</p>
   </div>
