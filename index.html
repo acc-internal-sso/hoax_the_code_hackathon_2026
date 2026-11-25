@@ -596,6 +596,14 @@ body.pm .hero-ctrl{bottom:calc(76px + env(safe-area-inset-bottom,0px));z-index:9
 @media(max-width:900px){.bi{grid-template-columns:1fr}.bi-mid svg{width:120px;height:100px}.bi-mid svg g.lane{display:none}.bi-mid{height:110px}}
 .seg button[aria-pressed="true"]{background:rgba(109,74,255,.18);color:var(--tx);font-weight:800}
 
+/* v5: two agents */
+.bi{grid-template-columns:1.05fr 170px 1fr}
+.bi-mid svg{width:170px;height:260px}
+.agent-a,.agent-b{transition:opacity .5s;opacity:.35}
+.bi:not(.dirb) .agent-a{opacity:1}.bi.dirb .agent-b{opacity:1}
+.fchip:not(.v){background:var(--teal);color:#fff;box-shadow:0 0 20px rgba(13,148,136,.55)}
+@media(max-width:900px){.bi-mid svg{width:170px;height:260px}.bi-mid svg g.lane{display:block}.bi-mid{height:auto}}
+
 </style>
 </head>
 <body>
@@ -701,8 +709,19 @@ body.pm .hero-ctrl{bottom:calc(76px + env(safe-area-inset-bottom,0px));z-index:9
     <div class="tin" id="tin"></div>
     <div class="status"><button class="btn sm pri" id="solRun" type="button">Restart animation</button><span class="sim">Simulated demonstration, no live TFS or Bitbucket connection</span><span class="msg" id="solMsg"></span></div>
   </div>
+  </section>
+
+<!-- ================= ARCHITECTURE ================= -->
+<section id="architecture" class="sec" data-name="Architecture">
+  <div class="beat wrap" data-beat id="pipeBeat">
+    <h3 style="font-size:clamp(26px,3.4vw,50px);font-weight:800;letter-spacing:-.035em;max-width:24ch">Seven stages. Only validated SQL crosses the gate.</h3>
+    <div class="ctl"><button class="btn sm pri" id="runPass" type="button">Run: human approves</button><button class="btn sm" id="runFail" type="button">Run: needs correction</button><span class="sim">Simulated run with sample data</span></div>
+    <div class="pipe" id="pipe" tabindex="0" aria-label="Seven execution stages, scrollable"><div class="pipe-in" id="pipeIn"><span class="pkt" id="pkt">SQL</span></div></div>
+    <div class="pdet" id="pdet" aria-live="polite"></div>
+    <p class="key">Only <em>validated, human-approved SQL</em> moves into source control.</p>
+  </div>
   <div class="beat wrap" data-beat id="solB2">
-    <h3 class="bi-h">One agent. Both directions.</h3>
+    <h3 class="bi-h">Two agents. Both directions.</h3>
     <p class="lede" style="margin-top:12px">Generate code from an approved TFS, or generate standardised TFS documentation from existing code.</p>
     <div class="seg" id="biSeg" role="group" aria-label="Choose the direction to show" style="margin-top:22px"><button type="button" aria-pressed="true" data-m="auto">Auto</button><button type="button" aria-pressed="false" data-m="a">TFS → Code</button><button type="button" aria-pressed="false" data-m="b">Code → TFS</button></div>
     <div class="rv-stage bi" id="bi">
@@ -715,31 +734,22 @@ body.pm .hero-ctrl{bottom:calc(76px + env(safe-area-inset-bottom,0px));z-index:9
         <div class="fld"><label>Filters</label><span data-f="filter"></span></div>
       </div>
       <div class="bi-mid" aria-hidden="true">
-        <svg viewBox="0 0 150 230"><defs><radialGradient id="og2" cx=".35" cy=".3"><stop offset="0" stop-color="#ecfbff"/><stop offset=".3" stop-color="#8ee7ff"/><stop offset=".65" stop-color="#6d4aff"/><stop offset="1" stop-color="#241a7a"/></radialGradient></defs>
-          <g class="lane la"><path d="M10 62H128"/><path d="M118 52l12 10-12 10"/></g>
-          <g class="lane lb"><path d="M140 168H22"/><path d="M32 158l-12 10 12 10"/></g>
-          <circle cx="75" cy="115" r="46" fill="rgba(109,74,255,.12)"><animate attributeName="r" values="44;52;44" dur="3s" repeatCount="indefinite"/></circle>
-          <circle cx="75" cy="115" r="30" fill="url(#og2)"/>
-          <g stroke="rgba(255,255,255,.55)" fill="none"><path d="M75 98L62 120L88 122Z"/></g><g fill="#fff"><circle cx="75" cy="98" r="2"/><circle cx="62" cy="120" r="2"/><circle cx="88" cy="122" r="2"/></g>
-          <ellipse cx="75" cy="115" rx="52" ry="15" fill="none" stroke="rgba(109,74,255,.5)" stroke-dasharray="3 6" transform="rotate(-20 75 115)"><animateTransform attributeName="transform" type="rotate" from="-20 75 115" to="340 75 115" dur="10s" repeatCount="indefinite"/></ellipse>
+        <svg viewBox="0 0 170 260"><defs>
+          <radialGradient id="ogv" cx=".35" cy=".3"><stop offset="0" stop-color="#f1ecff"/><stop offset=".3" stop-color="#b9a4ff"/><stop offset=".65" stop-color="#6d4aff"/><stop offset="1" stop-color="#241a7a"/></radialGradient>
+          <radialGradient id="ogt" cx=".35" cy=".3"><stop offset="0" stop-color="#eafffb"/><stop offset=".3" stop-color="#5eead4"/><stop offset=".65" stop-color="#0d9488"/><stop offset="1" stop-color="#064e47"/></radialGradient></defs>
+          <g class="lane la"><path d="M8 70H150"/><path d="M140 60l12 10-12 10"/></g>
+          <g class="lane lb"><path d="M162 190H20"/><path d="M30 180l-12 10 12 10"/></g>
+          <g class="agent-a"><circle cx="85" cy="70" r="34" fill="rgba(109,74,255,.14)"><animate attributeName="r" values="32;40;32" dur="2.6s" repeatCount="indefinite"/></circle><circle cx="85" cy="70" r="25" fill="url(#ogv)"/><path d="M85 55L74 74L96 76Z" fill="none" stroke="rgba(255,255,255,.65)"/><g fill="#fff"><circle cx="85" cy="55" r="2"/><circle cx="74" cy="74" r="2"/><circle cx="96" cy="76" r="2"/></g><ellipse cx="85" cy="70" rx="40" ry="11" fill="none" stroke="rgba(109,74,255,.55)" stroke-dasharray="3 6" transform="rotate(-20 85 70)"><animateTransform attributeName="transform" type="rotate" from="-20 85 70" to="340 85 70" dur="8s" repeatCount="indefinite"/></ellipse>
+            <text x="85" y="118" text-anchor="middle" font-size="12.5" font-weight="800" fill="#4a2fd0" font-family="Manrope,sans-serif">TFS → Code</text><text x="85" y="132" text-anchor="middle" font-size="10.5" font-weight="600" fill="#525b82" font-family="Manrope,sans-serif">generation agent</text></g>
+          <g class="agent-b"><circle cx="85" cy="190" r="34" fill="rgba(13,148,136,.16)"><animate attributeName="r" values="32;40;32" dur="2.6s" repeatCount="indefinite"/></circle><circle cx="85" cy="190" r="25" fill="url(#ogt)"/><path d="M85 175L74 194L96 196Z" fill="none" stroke="rgba(255,255,255,.7)"/><g fill="#fff"><circle cx="85" cy="175" r="2"/><circle cx="74" cy="194" r="2"/><circle cx="96" cy="196" r="2"/></g><ellipse cx="85" cy="190" rx="40" ry="11" fill="none" stroke="rgba(13,148,136,.6)" stroke-dasharray="3 6" transform="rotate(20 85 190)"><animateTransform attributeName="transform" type="rotate" from="20 85 190" to="-340 85 190" dur="8s" repeatCount="indefinite"/></ellipse>
+            <text x="85" y="238" text-anchor="middle" font-size="12.5" font-weight="800" fill="#0d7a70" font-family="Manrope,sans-serif">Code → TFS</text><text x="85" y="252" text-anchor="middle" font-size="10.5" font-weight="600" fill="#525b82" font-family="Manrope,sans-serif">documentation agent</text></g>
         </svg>
-        <p class="bi-dir" id="biDir">TFS → Code</p>
+        <p class="bi-dir sr" id="biDir">TFS → Code</p>
       </div>
       <div class="win codew" id="biCode" aria-label="Sample SQL view, illustrative"><div class="dots"><i></i><i></i><i></i></div><div class="sbeam" id="biBeam"></div></div>
     </div>
     <div class="status" style="margin-top:14px"><span class="msg" id="biMsg"></span><span class="sim">Simulated sample, illustrative names</span></div>
     <div class="why"><span>Fewer manual follow-ups</span><span>Uniform documentation</span><span>Code and TFS stay aligned</span></div>
-  </div>
-  </section>
-
-<!-- ================= ARCHITECTURE ================= -->
-<section id="architecture" class="sec" data-name="Architecture">
-  <div class="beat wrap" data-beat id="pipeBeat">
-    <h3 style="font-size:clamp(26px,3.4vw,50px);font-weight:800;letter-spacing:-.035em;max-width:24ch">Seven stages. Only validated SQL crosses the gate.</h3>
-    <div class="ctl"><button class="btn sm pri" id="runPass" type="button">Run: human approves</button><button class="btn sm" id="runFail" type="button">Run: needs correction</button><span class="sim">Simulated run with sample data</span></div>
-    <div class="pipe" id="pipe" tabindex="0" aria-label="Seven execution stages, scrollable"><div class="pipe-in" id="pipeIn"><span class="pkt" id="pkt">SQL</span></div></div>
-    <div class="pdet" id="pdet" aria-live="polite"></div>
-    <p class="key">Only <em>validated, human-approved SQL</em> moves into source control.</p>
   </div>
 </section>
 
