@@ -610,6 +610,16 @@ body.pm .hero-ctrl{bottom:calc(76px + env(safe-area-inset-bottom,0px));z-index:9
 
 @media(min-width:1100px){#team .tg{grid-template-columns:repeat(4,1fr);gap:14px}#team .tc{padding:24px 20px 22px}#team .tc h3{font-size:20px;margin-top:16px}#team .mono2{width:92px;height:92px}}
 
+/* TFS <-> CODE slow cross-fade */
+.sw{display:inline-grid;justify-items:center}
+.sw b{grid-area:1/1;font:inherit;font-weight:800}
+.sw .w1{animation:swA 9s ease-in-out infinite}
+.sw .w2{animation:swB 9s ease-in-out infinite}
+@keyframes swA{0%,30%{opacity:1;filter:blur(0)}48%,82%{opacity:0;filter:blur(6px)}100%{opacity:1;filter:blur(0)}}
+@keyframes swB{0%,30%{opacity:0;filter:blur(6px)}48%,82%{opacity:1;filter:blur(0)}100%{opacity:0;filter:blur(6px)}}
+.thanks .wm2 .ar{margin:0 .15em;display:inline-block;animation:arP 4.5s ease-in-out infinite}
+@keyframes arP{50%{transform:scaleX(1.25);opacity:.7}}
+
 </style>
 </head>
 <body>
@@ -794,7 +804,7 @@ body.pm .hero-ctrl{bottom:calc(76px + env(safe-area-inset-bottom,0px));z-index:9
   <div class="thanks beat" id="finB" data-beat>
     <h2 class="fin-h grad rise">From Manual Assembly to Intelligent Automation.</h2>
     <p class="wm grad rise">HOAX THE CODE</p>
-    <p class="wm2 rise">TFS ↔ CODE</p>
+    <p class="wm2 rise" role="img" aria-label="TFS to CODE, and CODE to TFS"><span class="sw" aria-hidden="true"><b class="w1">TFS</b><b class="w2">CODE</b></span> <span class="ar" aria-hidden="true">↔</span> <span class="sw" aria-hidden="true"><b class="w1">CODE</b><b class="w2">TFS</b></span></p>
     <p class="tgl rise">Less repetition. Faster delivery. Better traceability.</p>
     <p class="ty rise">Thank you.</p>
     <p class="qa rise">Questions &amp; Discussion.</p>
